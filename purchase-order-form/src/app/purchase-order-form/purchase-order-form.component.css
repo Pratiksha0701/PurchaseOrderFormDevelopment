@@ -1,0 +1,12 @@
+.container {
+  margin-top: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.input-group {
+  width: 100%;
+}
+.table td, .table th {
+  padding: 8px;
+}

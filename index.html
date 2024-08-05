@@ -1,330 +1,224 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Order</title>
+    <title>Purchase Order Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-control {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th,
-        .table td {
-            padding: 0.5rem;
-            text-align: left;
-            border: 1px solid #ccc;
-        }
+        .section { margin-bottom: 20px; }
+        .font-weight-bold { font-weight: 700; }
+        .form-check-label { margin-bottom: 0; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Purchase Order | New</h1>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="clientName">Client Name *</label>
-                    <input type="text" class="form-control" id="clientName" placeholder="Collabens - Collabens Inc" value="Collabens - Collabens Inc">
-                </div>
-                <div class="form-group">
-                    <label for="receivedFrom">Received From *</label>
-                    <input type="text" class="form-control" id="receivedFrom" placeholder="Received From Name">
-                </div>
-                <div class="form-group">
-                    <label for="receivedFromEmail">Received From Email ID</label>
-                    <input type="email" class="form-control" id="receivedFromEmail" placeholder="Received From Email ID">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="purchaseOrderType">Purchase Order Type *</label>
-                    <input type="text" class="form-control" id="purchaseOrderType" placeholder="Group PO" value="Group PO">
-                </div>
-                <div class="form-group">
-                    <label for="purchaseOrderNo">Purchase Order No *</label>
-                    <input type="text" class="form-control" id="purchaseOrderNo" placeholder="PO Number">
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="poStartDate">PO Start Date *</label>
-                            <input type="date" class="form-control" id="poStartDate">
-                        </div>
+        <h2 class="text-center mb-4">Purchase Order | New</h2>
+        <form id="purchaseOrderForm">
+            <div class="section">
+                <h5 class="font-weight-bold">Purchase Order Details</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="clientName" class="font-weight-bold"><span style="color: red;">*</span> Client Name</label>
+                        <select class="form-control" id="clientName" required>
+                            <option value="">Select Client</option>
+                            <option value="Client1">Client1</option>
+                            <option value="Client2">Client2</option>
+                        </select>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="poEndDate">PO End Date *</label>
-                            <input type="date" class="form-control" id="poEndDate">
-                        </div>
+                    <div class="form-group col-md-3">
+                        <label for="purchaseOrderType" class="font-weight-bold"><span style="color: red;">*</span> Purchase Order Type</label>
+                        <select class="form-control" id="purchaseOrderType" required>
+                            <option value="">Select Type</option>
+                            <option value="GroupPO">Group PO</option>
+                            <option value="IndividualPO">Individual PO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="purchaseOrderNo" class="font-weight-bold"><span style="color: red;">*</span> Purchase Order No</label>
+                        <input type="text" class="form-control" id="purchaseOrderNo" placeholder="PO Number" pattern="[A-Za-z0-9@#]+" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="receivedOn" class="font-weight-bold"><span style="color: red;">*</span> Received On</label>
+                        <input type="date" class="form-control" id="receivedOn" required>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="budget">Budget *</label>
-                            <input type="number" class="form-control" id="budget">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="receivedFromName" class="font-weight-bold"><span style="color: red;">*</span> Received From Name</label>
+                        <input type="text" class="form-control" id="receivedFromName" placeholder="Received From Name" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="receivedFromEmail" class="font-weight-bold"><span style="color: red;">*</span> Received From Email ID</label>
+                        <input type="email" class="form-control" id="receivedFromEmail" placeholder="Email ID" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="poStartDate" class="font-weight-bold"><span style="color: red;">*</span> PO Start Date</label>
+                        <input type="date" class="form-control" id="poStartDate" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="poEndDate" class="font-weight-bold"><span style="color: red;">*</span> PO End Date</label>
+                        <input type="date" class="form-control" id="poEndDate" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="budget" class="font-weight-bold"><span style="color: red;">*</span> Budget</label>
+                        <input type="number" class="form-control" id="budget" placeholder="Budget" max="99999" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="currency" class="font-weight-bold"><span style="color: red;">*</span> Currency</label>
+                        <select class="form-control" id="currency" required>
+                            <option value="USD">USD - Dollars ($)</option>
+                            <option value="EUR">EUR - Euros (€)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h5 class="font-weight-bold">Talent Details</h5>
+                <div id="reqContainer">
+                    <div class="reqSection">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="jobTitle1" class="font-weight-bold"><span style="color: red;">*</span> Job Title/REQ Name</label>
+                                <select class="form-control jobTitle" required>
+                                    <option value="">Select Job Title</option>
+                                    <option value="REQ1">REQ1</option>
+                                    <option value="REQ2">REQ2</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="reqId1" class="font-weight-bold"><span style="color: red;">*</span> REQ ID/Assignment ID</label>
+                                <input type="text" class="form-control reqId" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input talentCheck" type="checkbox" value="Talent1">
+                                    <label class="form-check-label font-weight-bold" for="talentCheck1">Talent1</label>
+                                </div>
+                                <div class="form-row mt-2 talentDetails" style="display: none;">
+                                    <div class="form-group col-md-2">
+                                        <label for="contractDuration1" class="font-weight-bold">Contract Duration</label>
+                                        <input type="number" class="form-control" placeholder="Duration">
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <label for="contractDurationUnit1" class="font-weight-bold">Months</label>
+                                        <select class="form-control">
+                                            <option value="Months">Months</option>
+                                            <option value="Years">Years</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="billRate1" class="font-weight-bold">Bill Rate</label>
+                                        <input type="number" class="form-control" placeholder="Bill Rate">
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <label for="billRateCurrency1" class="font-weight-bold">Currency</label>
+                                        <select class="form-control">
+                                            <option value="USD">USD - Dollars ($)</option>
+                                            <option value="EUR">EUR - Euros (€)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="standardTimeBR1" class="font-weight-bold">Standard Time BR</label>
+                                        <input type="number" class="form-control" placeholder="Standard Time BR">
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <label for="standardTimeBRCurrency1" class="font-weight-bold">Currency</label>
+                                        <select class="form-control">
+                                            <option value="USD">USD - Dollars ($)</option>
+                                            <option value="EUR">EUR - Euros (€)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="overTimeBR1" class="font-weight-bold">Over Time BR</label>
+                                        <input type="number" class="form-control" placeholder="Over Time BR">
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <label for="overTimeBRCurrency1" class="font-weight-bold">Currency</label>
+                                        <select class="form-control">
+                                            <option value="USD">USD - Dollars ($)</option>
+                                            <option value="EUR">EUR - Euros (€)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="currency">Currency *</label>
-                            <select class="form-control" id="currency">
-                                <option value="USD">USD - Dollars ($)</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
+                <button type="button" class="btn btn-primary mt-3" id="addAnotherBtn" style="display: none;">Add Another</button>
             </div>
-        </div>
 
-        <h2 class="mt-4 mb-3">Talent Detail</h2>
-
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="jobTitleName">Job Title/REQ Name *</label>
-                    <select class="form-control" id="jobTitleName">
-                        <option value="Application Development">Application Development</option>
-                        <option value="Business Administrator">Business Administrator</option>
-                    </select>
+            <div class="form-row mt-4">
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary mr-3">Save</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="jobReqID">Job REQ ID *</label>
-                    <input type="text" class="form-control" id="jobReqID" placeholder="OWNAL 234" value="OWNAL 234">
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-md-12">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="talent1" checked>
-                    <label class="form-check-label" for="talent1">Monika Goyal Tast</label>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="contractDuration1">Contract Duration</label>
-                    <input type="number" class="form-control" id="contractDuration1">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="months1">Months</label>
-                    <input type="text" class="form-control" id="months1" placeholder="Months" value="Months">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="billRate1">Bill Rate</label>
-                    <input type="number" class="form-control" id="billRate1">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="currency1">Currency</label>
-                    <select class="form-control" id="currency1">
-                        <option value="USD">USD - Dollars ($)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="standardTimeBR1">Standard Time BR</label>
-                    <input type="number" class="form-control" id="standardTimeBR1">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="currency2">Currency</label>
-                    <select class="form-control" id="currency2">
-                        <option value="USD">USD - Dollars ($)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="overTimeBR1">Over Time BR</label>
-                    <input type="number" class="form-control" id="overTimeBR1">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="currency3">Currency</label>
-                    <select class="form-control" id="currency3">
-                        <option value="USD">USD - Dollars ($)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-md-12">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="talent2">
-                    <label class="form-check-label" for="talent2">shail khatri</label>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="contractDuration2">Contract Duration</label>
-                    <input type="number" class="form-control" id="contractDuration2">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="months2">Months</label>
-                    <input type="text" class="form-control" id="months2" placeholder="Months" value="Months">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="billRate2">Bill Rate</label>
-                    <input type="number" class="form-control" id="billRate2">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="currency4">Currency</label>
-                    <select class="form-control" id="currency4">
-                        <option value="USD">USD - Dollars ($)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="standardTimeBR2">Standard Time BR</label>
-                    <input type="number" class="form-control" id="standardTimeBR2">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="currency5">Currency</label>
-                    <select class="form-control" id="currency5">
-                        <option value="USD">USD - Dollars ($)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="overTimeBR2">Over Time BR</label>
-                    <input type="number" class="form-control" id="overTimeBR2">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="currency6">Currency</label>
-                    <select class="form-control" id="currency6">
-                        <option value="USD">USD - Dollars ($)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="jobTitleName2">Job Title/REQ Name *</label>
-                    <select class="form-control" id="jobTitleName2">
-                        <option value="Business Administrator">Business Administrator</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="jobReqID2">Job REQ ID *</label>
-                    <input type="text" class="form-control" id="jobReqID2" placeholder="CLK_12880" value="CLK_12880">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <button class="btn btn-primary mr-2" id="addAnother">Add Another</button>
-                <button class="btn btn-secondary" id="reset">Reset</button>
-                <button class="btn btn-primary" id="save">Save</button>
-            </div>
-        </div>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#addAnother').click(function() {
-                // Add another talent section (clone the existing section)
-                var talentSection = $('.row.mb-3:last').clone();
-                talentSection.find('input[type="checkbox"]').prop('checked', false);
-                talentSection.find('input[type="text"], input[type="number"]').val('');
-                talentSection.insertAfter($('.row.mb-3:last'));
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('purchaseOrderForm');
+            const purchaseOrderType = document.getElementById('purchaseOrderType');
+            const addAnotherBtn = document.getElementById('addAnotherBtn');
+            const reqContainer = document.getElementById('reqContainer');
+
+            purchaseOrderType.addEventListener('change', function () {
+                if (this.value === 'GroupPO') {
+                    addAnotherBtn.style.display = 'block';
+                } else {
+                    addAnotherBtn.style.display = 'none';
+                    while (reqContainer.children.length > 1) {
+                        reqContainer.removeChild(reqContainer.lastChild);
+                    }
+                }
             });
 
-            $('#reset').click(function() {
-                // Reset form to initial state
-                $('input[type="text"], input[type="number"], input[type="date"]').val('');
-                $('input[type="checkbox"]').prop('checked', false);
-                $('select').val('');
-                $('.row.mb-3').not(':first').remove(); // Remove added sections
+            addAnotherBtn.addEventListener('click', function () {
+                const newReqSection = reqContainer.firstElementChild.cloneNode(true);
+                newReqSection.querySelectorAll('input').forEach(input => input.value = '');
+                reqContainer.appendChild(newReqSection);
             });
 
-            $('#save').click(function() {
-                // Perform saving logic (replace with actual functionality)
-                alert('Purchase Order saved!');
+            reqContainer.addEventListener('change', function (e) {
+                if (e.target.classList.contains('jobTitle')) {
+                    const reqSection = e.target.closest('.reqSection');
+                    const reqIdInput = reqSection.querySelector('.reqId');
+                    reqIdInput.value = e.target.value + '_ID'; // Simulate fetching REQ ID
+                }
+                if (e.target.classList.contains('talentCheck')) {
+                    const talentDetails = e.target.closest('.form-check').nextElementSibling;
+                    talentDetails.style.display = e.target.checked ? 'flex' : 'none';
+                    talentDetails.querySelectorAll('input, select').forEach(el => el.required = e.target.checked);
+                }
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Form submitted successfully!');
+            });
+
+            form.addEventListener('reset', function () {
+                reqContainer.querySelectorAll('.reqSection').forEach((section, index) => {
+                    if (index > 0) {
+                        section.remove();
+                    } else {
+                        section.querySelectorAll('input, select').forEach(input => input.value = '');
+                        section.querySelectorAll('.talentDetails').forEach(details => details.style.display = 'none');
+                        section.querySelectorAll('.talentCheck').forEach(check => check.checked = false);
+                    }
+                });
+                addAnotherBtn.style.display = 'none';
             });
         });
     </script>
 </body>
-</html> 
+</html>

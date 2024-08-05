@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Order Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .form-container {
+      margin-top: 20px;
+    }
+    .form-group label {
+      margin-bottom: 5px;
+    }
+    .form-group input, .form-group select {
+      margin-bottom: 10px;
+    }
+    .form-group .invalid-feedback {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container form-container">
+    <h2 class="text-center mb-4">Purchase Order Form</h2>
+    <form [formGroup]="purchaseOrderForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="clientName">Client Name<span class="text-danger">*</span></label>
+            <select class="form-control" id="clientName" formControlName="clientName" required>
+              <option value="">Select Client</option>
+              <option value="Collabens - Collabens Inc">Collabens - Collabens Inc</option>
+              <option value="Client 2">Client 2</option>
+            </select>
+            <div *ngIf="purchaseOrderForm.get('clientName').hasError('required') && purchaseOrderForm.get('clientName').touched" class="invalid-feedback">
+              Please select a client.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="purchaseOrderType">Purchase Order Type<span class="text-danger">*</span></label>
+            <select class="form-control" id="purchaseOrderType" formControlName="purchaseOrderType" required>
+              <option value="">Select Type</option>
+              <option value="Group PO">Group PO</option>
+              <option value="Individual PO">Individual PO</option>
+            </select>
+            <div *ngIf="purchaseOrderForm.get('purchaseOrderType').hasError('required') && purchaseOrderForm.get('purchaseOrderType').touched" class="invalid-feedback">
+              Please select a purchase order type.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="purchaseOrderNo">Purchase Order No<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="purchaseOrderNo" formControlName="purchaseOrderNo" required>
+            <div *ngIf="purchaseOrderForm.get('purchaseOrderNo').hasError('required') && purchaseOrderForm.get('purchaseOrderNo').touched" class="invalid-feedback">
+              Please enter purchase order number.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="receivedOn">Received On<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="receivedOn" formControlName="receivedOn" required>
+            <div *ngIf="purchaseOrderForm.get('receivedOn').hasError('required') && purchaseOrderForm.get('receivedOn').touched" class="invalid-feedback">
+              Please select a date.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="receivedFromName">Received From Name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="receivedFromName" formControlName="receivedFromName" required>
+            <div *ngIf="purchaseOrderForm.get('receivedFromName').hasError('required') && purchaseOrderForm.get('receivedFromName').touched" class="invalid-feedback">
+              Please enter name.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="receivedFromEmail">Received From Email ID<span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="receivedFromEmail" formControlName="receivedFromEmail" required>
+            <div *ngIf="purchaseOrderForm.get('receivedFromEmail').hasError('required') && purchaseOrderForm.get('receivedFromEmail').touched" class="invalid-feedback">
+              Please enter email ID.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="poStartDate">PO Start Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="poStartDate" formControlName="poStartDate" required>
+            <div *ngIf="purchaseOrderForm.get('poStartDate').hasError('required') && purchaseOrderForm.get('poStartDate').touched" class="invalid-feedback">
+              Please select a date.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="poEndDate">PO End Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="poEndDate" formControlName="poEndDate" required
+              [min]="purchaseOrderForm.get('poStartDate').value">
+            <div *ngIf="purchaseOrderForm.get('poEndDate').hasError('required') && purchaseOrderForm.get('poEndDate').touched" class="invalid-feedback">
+              Please select a date.
+            </div>
+            <div *ngIf="purchaseOrderForm.get('poEndDate').hasError('min') && purchaseOrderForm.get('poEndDate').touched" class="invalid-feedback">
+              End date cannot be before start date.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="budget">Budget<span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="budget" formControlName="budget" required
+              [max]="99999">
+            <div *ngIf="purchaseOrderForm.get('budget').hasError('required') && purchaseOrderForm.get('budget').touched" class="invalid-feedback">
+              Please enter budget.
+            </div>
+            <div *ngIf="purchaseOrderForm.get('budget').hasError('max') && purchaseOrderForm.get('budget').touched" class="invalid-feedback">
+              Budget cannot exceed 99999.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <h3>Talent Details</h3>
+        </div>
+      </div>
+      <div class="row" *ngFor="let talent of talents; let i = index">
+        <div class="col-md-12" *ngIf="i === 0">
+          <div class="form-group">
+            <label for="jobTitleReqName">Job Title/REQ Name<span class="text-danger">*</span></label>
+            <select class="form-control" id="jobTitleReqName" formControlName="jobTitleReqName" required
+              (change)="onJobTitleChange(talent)">
+              <option value="">Select Job Title</option>
+              <option *ngFor="let job of jobs" [value]="job.id">{{ job.name }}</option>
+            </select>
+            <div *ngIf="purchaseOrderForm.get('jobTitleReqName').hasError('required') && purchaseOrderForm.get('jobTitleReqName').touched" class="invalid-feedback">
+              Please select a job title.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="jobReqId">Job REQ ID<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="jobReqId" formControlName="jobReqId" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="checkbox" formControlName="selectedTalents" [value]="talent.id">
+            <label for="talentName">{{ talent.name }}</label>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="talent.selected">
+          <div class="form-group">
+            <label for="contractDuration">Contract Duration</label>
+            <input type="number" class="form-control" id="contractDuration" formControlName="contractDuration"
+              [attr.min]="1">
+            <div *ngIf="talent.contractDuration.hasError('min') && talent.contractDuration.touched" class="invalid-feedback">
+              Minimum duration is 1.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="talent.selected">
+          <div class="form-group">
+            <label for="billRate">Bill Rate</label>
+            <input type="number" class="form-control" id="billRate" formControlName="billRate">
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="talent.selected">
+          <div class="form-group">
+            <label for="currency">Currency</label>
+            <select class="form-control" id="currency" formControlName="currency">
+              <option value="USD">USD</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="talent.selected">
+          <div class="form-group">
+            <label for="standardTimeBR">Standard Time BR</label>
+            <input type="number" class="form-control" id="standardTimeBR" formControlName="standardTimeBR">
+          </div>
+        </div>
+        <div class="col-md-3" *ngIf="talent.selected">
+          <div class="form-group">
+            <label for="overTimeBR">Over Time BR</label>
+            <input type="number" class="form-control" id="overTimeBR" formControlName="overTimeBR">
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-primary" [disabled]="!purchaseOrderForm.valid">Save</button>
+          <button type="reset" class="btn btn-secondary ml-2">Reset</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('purchaseOrderApp', [])
+      .controller('PurchaseOrderController', function($scope) {
+        $scope.jobs = [
+          { id: 'OWNAL_234', name: 'Application Development' },
+          { id: 'CLK_12880', name: 'Business Administrator' }
+        ];
+        $scope.talents = [
+          { id: 1, name: 'Monika Goyal Test', selected: false, contractDuration: null, billRate: null, currency: null, standardTimeBR: null, overTimeBR: null },
+          { id: 2, name: 'shail khatri', selected: false, contractDuration: null, billRate: null, currency: null, standardTimeBR: null, overTimeBR: null }
+        ];
+
+        $scope.purchaseOrderForm = {};
+        $scope.onSubmit = function() {
+          console.log($scope.purchaseOrderForm);
+        };
+
+        $scope.onJobTitleChange = function(talent) {
+          talent.jobReqId = $scope.jobs.find(job => job.name === $scope.purchaseOrderForm.jobTitleReqName.value)?.id;
+        };
+
+        $scope.addAnotherReq = function() {
+          $scope.talents.push({
+            id: $scope.talents.length + 1,
+            name: '',
+            selected: false,
+            contractDuration: null,
+            billRate: null,
+            currency: null,
+            standardTimeBR: null,
+            overTimeBR: null
+          });
+        };
+      });
+  </script>
+  <script>
+    angular.bootstrap(document, ['purchaseOrderApp']);
+  </script>
+</body>
+</html>

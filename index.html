@@ -1,223 +1,260 @@
 
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Order Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .section { margin-bottom: 20px; }
-        .font-weight-bold { font-weight: 700; }
-        .form-check-label { margin-bottom: 0; }
-    </style>
 </head>
 <body>
     <div class="container">
         <h2 class="text-center mb-4">Purchase Order | New</h2>
         <form id="purchaseOrderForm">
-            <div class="section">
-                <h5 class="font-weight-bold">Purchase Order Details</h5>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="clientName" class="font-weight-bold"><span style="color: red;">*</span> Client Name</label>
-                        <select class="form-control" id="clientName" required>
-                            <option value="">Select Client</option>
-                            <option value="Client1">Client1</option>
-                            <option value="Client2">Client2</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="purchaseOrderType" class="font-weight-bold"><span style="color: red;">*</span> Purchase Order Type</label>
-                        <select class="form-control" id="purchaseOrderType" required>
-                            <option value="">Select Type</option>
-                            <option value="GroupPO">Group PO</option>
-                            <option value="IndividualPO">Individual PO</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="purchaseOrderNo" class="font-weight-bold"><span style="color: red;">*</span> Purchase Order No</label>
-                        <input type="text" class="form-control" id="purchaseOrderNo" placeholder="PO Number" pattern="[A-Za-z0-9@#]+" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="receivedOn" class="font-weight-bold"><span style="color: red;">*</span> Received On</label>
-                        <input type="date" class="form-control" id="receivedOn" required>
-                    </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="clientName" class="font-weight-bold"><span style="color: red;">*</span> Client Name</label>
+                    <input type="text" class="form-control" id="clientName" placeholder="Client Name">
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="receivedFromName" class="font-weight-bold"><span style="color: red;">*</span> Received From Name</label>
-                        <input type="text" class="form-control" id="receivedFromName" placeholder="Received From Name" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="receivedFromEmail" class="font-weight-bold"><span style="color: red;">*</span> Received From Email ID</label>
-                        <input type="email" class="form-control" id="receivedFromEmail" placeholder="Email ID" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="poStartDate" class="font-weight-bold"><span style="color: red;">*</span> PO Start Date</label>
-                        <input type="date" class="form-control" id="poStartDate" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="poEndDate" class="font-weight-bold"><span style="color: red;">*</span> PO End Date</label>
-                        <input type="date" class="form-control" id="poEndDate" required>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="budget" class="font-weight-bold"><span style="color: red;">*</span> Budget</label>
-                        <input type="number" class="form-control" id="budget" placeholder="Budget" max="99999" required>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="currency" class="font-weight-bold"><span style="color: red;">*</span> Currency</label>
-                        <select class="form-control" id="currency" required>
-                            <option value="USD">USD - Dollars ($)</option>
-                            <option value="EUR">EUR - Euros (€)</option>
-                        </select>
-                    </div>
+                <div class="form-group col-md-3">
+                    <label for="purchaseOrderType" class="font-weight-bold"><span style="color: red;">*</span> Purchase Order Type</label>
+                    <select class="form-control" id="purchaseOrderType" onchange="handlePOTypeChange()">
+                        <option value="GroupPO">Group PO</option>
+                        <option value="IndividualPO">Individual PO</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="purchaseOrderNo" class="font-weight-bold"><span style="color: red;">*</span> Purchase Order No</label>
+                    <input type="text" class="form-control" id="purchaseOrderNo" placeholder="PO Number">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="receivedOn" class="font-weight-bold"><span style="color: red;">*</span> Received On</label>
+                    <input type="date" class="form-control" id="receivedOn">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="receivedFrom" class="font-weight-bold"><span style="color: red;">*</span> Received From</label>
+                    <input type="text" class="form-control" id="receivedFrom" placeholder="Received From Name">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="receivedFromEmail" class="font-weight-bold">Received From Email ID</label>
+                    <input type="email" class="form-control" id="receivedFromEmail" placeholder="Email ID">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="poStartDate" class="font-weight-bold"><span style="color: red;">*</span> PO Start Date</label>
+                    <input type="date" class="form-control" id="poStartDate">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="poEndDate" class="font-weight-bold"><span style="color: red;">*</span> PO End Date</label>
+                    <input type="date" class="form-control" id="poEndDate">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="budget" class="font-weight-bold"><span style="color: red;">*</span> Budget</label>
+                    <input type="number" class="form-control" id="budget" placeholder="Budget">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="currency" class="font-weight-bold"><span style="color: red;">*</span> Currency</label>
+                    <select class="form-control" id="currency">
+                        <option value="USD">USD - Dollars ($)</option>
+                        <option value="EUR">EUR - Euros (€)</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="section">
-                <h5 class="font-weight-bold">Talent Details</h5>
-                <div id="reqContainer">
-                    <div class="reqSection">
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="jobTitle1" class="font-weight-bold"><span style="color: red;">*</span> Job Title/REQ Name</label>
-                                <select class="form-control jobTitle" required>
-                                    <option value="">Select Job Title</option>
-                                    <option value="REQ1">REQ1</option>
-                                    <option value="REQ2">REQ2</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="reqId1" class="font-weight-bold"><span style="color: red;">*</span> REQ ID/Assignment ID</label>
-                                <input type="text" class="form-control reqId" readonly>
-                            </div>
+            <div id="reqSection">
+                <div class="form-row mt-4">
+                    <div class="col-md-12">
+                        <h5 class="font-weight-bold">Talent Detail</h5>
+                    </div>
+                </div>
+                <div class="req-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="jobTitle" class="font-weight-bold"><span style="color: red;">*</span> Job Title/REQ Name</label>
+                            <select class="form-control jobTitle" onchange="handleJobTitleChange(this)">
+                                <option value="">Select Job Title</option>
+                                <option value="REQ001">REQ001</option>
+                                <option value="REQ002">REQ002</option>
+                            </select>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <div class="form-check">
-                                    <input class="form-check-input talentCheck" type="checkbox" value="Talent1">
-                                    <label class="form-check-label font-weight-bold" for="talentCheck1">Talent1</label>
-                                </div>
-                                <div class="form-row mt-2 talentDetails" style="display: none;">
-                                    <div class="form-group col-md-2">
-                                        <label for="contractDuration1" class="font-weight-bold">Contract Duration</label>
-                                        <input type="number" class="form-control" placeholder="Duration">
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="contractDurationUnit1" class="font-weight-bold">Months</label>
-                                        <select class="form-control">
-                                            <option value="Months">Months</option>
-                                            <option value="Years">Years</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="billRate1" class="font-weight-bold">Bill Rate</label>
-                                        <input type="number" class="form-control" placeholder="Bill Rate">
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="billRateCurrency1" class="font-weight-bold">Currency</label>
-                                        <select class="form-control">
-                                            <option value="USD">USD - Dollars ($)</option>
-                                            <option value="EUR">EUR - Euros (€)</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="standardTimeBR1" class="font-weight-bold">Standard Time BR</label>
-                                        <input type="number" class="form-control" placeholder="Standard Time BR">
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="standardTimeBRCurrency1" class="font-weight-bold">Currency</label>
-                                        <select class="form-control">
-                                            <option value="USD">USD - Dollars ($)</option>
-                                            <option value="EUR">EUR - Euros (€)</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="overTimeBR1" class="font-weight-bold">Over Time BR</label>
-                                        <input type="number" class="form-control" placeholder="Over Time BR">
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="overTimeBRCurrency1" class="font-weight-bold">Currency</label>
-                                        <select class="form-control">
-                                            <option value="USD">USD - Dollars ($)</option>
-                                            <option value="EUR">EUR - Euros (€)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-group col-md-3">
+                            <label for="jobID" class="font-weight-bold"><span style="color: red;">*</span> Job ID/REQ ID</label>
+                            <input type="text" class="form-control jobID" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-md-12 talents-list">
+                            <!-- Talents will be dynamically inserted here based on the selected Job Title -->
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-secondary" onclick="addTalentDetail(this)">Add Another Talent</button>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary mt-3" id="addAnotherBtn" style="display: none;">Add Another</button>
             </div>
 
             <div class="form-row mt-4">
                 <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-secondary mr-3" onclick="addReqSection()" style="display: none;" id="addAnotherBtn">Add Another REQ</button>
                     <button type="submit" class="btn btn-primary mr-3">Save</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="reset" class="btn btn-secondary" onclick="resetForm()">Reset</button>
                 </div>
             </div>
         </form>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('purchaseOrderForm');
-            const purchaseOrderType = document.getElementById('purchaseOrderType');
+        let reqCounter = 1;
+        let talentCounter = 1;
+
+        function handlePOTypeChange() {
+            const poType = document.getElementById('purchaseOrderType').value;
             const addAnotherBtn = document.getElementById('addAnotherBtn');
-            const reqContainer = document.getElementById('reqContainer');
-
-            purchaseOrderType.addEventListener('change', function () {
-                if (this.value === 'GroupPO') {
-                    addAnotherBtn.style.display = 'block';
-                } else {
-                    addAnotherBtn.style.display = 'none';
-                    while (reqContainer.children.length > 1) {
-                        reqContainer.removeChild(reqContainer.lastChild);
-                    }
-                }
-            });
-
-            addAnotherBtn.addEventListener('click', function () {
-                const newReqSection = reqContainer.firstElementChild.cloneNode(true);
-                newReqSection.querySelectorAll('input').forEach(input => input.value = '');
-                reqContainer.appendChild(newReqSection);
-            });
-
-            reqContainer.addEventListener('change', function (e) {
-                if (e.target.classList.contains('jobTitle')) {
-                    const reqSection = e.target.closest('.reqSection');
-                    const reqIdInput = reqSection.querySelector('.reqId');
-                    reqIdInput.value = e.target.value + '_ID'; // Simulate fetching REQ ID
-                }
-                if (e.target.classList.contains('talentCheck')) {
-                    const talentDetails = e.target.closest('.form-check').nextElementSibling;
-                    talentDetails.style.display = e.target.checked ? 'flex' : 'none';
-                    talentDetails.querySelectorAll('input, select').forEach(el => el.required = e.target.checked);
-                }
-            });
-
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                alert('Form submitted successfully!');
-            });
-
-            form.addEventListener('reset', function () {
-                reqContainer.querySelectorAll('.reqSection').forEach((section, index) => {
+            if (poType === 'GroupPO') {
+                addAnotherBtn.style.display = 'block';
+            } else {
+                addAnotherBtn.style.display = 'none';
+                // Remove additional REQ sections if any
+                const reqGroups = document.querySelectorAll('.req-group');
+                reqGroups.forEach((group, index) => {
                     if (index > 0) {
-                        section.remove();
-                    } else {
-                        section.querySelectorAll('input, select').forEach(input => input.value = '');
-                        section.querySelectorAll('.talentDetails').forEach(details => details.style.display = 'none');
-                        section.querySelectorAll('.talentCheck').forEach(check => check.checked = false);
+                        group.remove();
                     }
                 });
-                addAnotherBtn.style.display = 'none';
-            });
+            }
+        }
+
+        function handleJobTitleChange(selectElement) {
+            const reqGroup = selectElement.closest('.req-group');
+            const jobID = reqGroup.querySelector('.jobID');
+            const talentsList = reqGroup.querySelector('.talents-list');
+            const selectedJobTitle = selectElement.value;
+            
+            // Auto fill Job ID based on selected Job Title
+            jobID.value = selectedJobTitle;
+            
+            // Clear previous talents list
+            talentsList.innerHTML = '';
+
+            if (selectedJobTitle) {
+                // Fetch and display talents associated with the selected REQ
+                const talents = getTalentsForReq(selectedJobTitle);
+                talents.forEach(talent => {
+                    addTalentDetailToList(talent, talentsList);
+                });
+            }
+        }
+
+        function addTalentDetailToList(talent, talentsList) {
+            const talentDiv = document.createElement('div');
+            talentDiv.classList.add('form-check', 'talent-detail');
+            talentDiv.innerHTML = `
+                <input class="form-check-input talent-checkbox" type="checkbox" id="${talent.id}" value="${talent.name}" onchange="handleTalentSelection(this)">
+                <label class="form-check-label" for="${talent.id}">${talent.name}</label>
+                <button type="button" class="btn btn-danger btn-sm ml-2" onclick="removeTalentDetail(this)">Delete</button>
+                <div class="talent-details" style="display: none;">
+                    <div class="form-row mt-2">
+                        <div class="form-group col-md-2">
+                            <label for="contractDuration${talent.id}" class="font-weight-bold">Contract Duration</label>
+                            <input type="number" class="form-control" id="contractDuration${talent.id}" placeholder="Duration">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="contractDurationUnit${talent.id}" class="font-weight-bold">Months</label>
+                            <select class="form-control" id="contractDurationUnit${talent.id}">
+                                <option value="Months">Months</option>
+                                <option value="Years">Years</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="billRate${talent.id}" class="font-weight-bold">Bill Rate</label>
+                            <input type="number" class="form-control" id="billRate${talent.id}" placeholder="Bill Rate">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="billRateCurrency${talent.id}" class="font-weight-bold">Currency</label>
+                            <select class="form-control" id="billRateCurrency${talent.id}">
+                                <option value="USD">USD - Dollars ($)</option>
+                                <option value="EUR">EUR - Euros (€)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="standardTimeBR${talent.id}" class="font-weight-bold">Standard Time BR</label>
+                            <input type="number" class="form-control" id="standardTimeBR${talent.id}" placeholder="Standard Time BR">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="standardTimeBRCurrency${talent.id}" class="font-weight-bold">Currency</label>
+                            <select class="form-control" id="standardTimeBRCurrency${talent.id}">
+                                <option value="USD">USD - Dollars ($)</option>
+                                <option value="EUR">EUR - Euros (€)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="overTimeBR${talent.id}" class="font-weight-bold">Over Time BR</label>
+                            <input type="number" class="form-control" id="overTimeBR${talent.id}" placeholder="Over Time BR">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="overTimeBRCurrency${talent.id}" class="font-weight-bold">Currency</label>
+                            <select class="form-control" id="overTimeBRCurrency${talent.id}">
+                                <option value="USD">USD - Dollars ($)</option>
+                                <option value="EUR">EUR - Euros (€)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            `;
+            talentsList.appendChild(talentDiv);
+        }
+
+        function handleTalentSelection(checkbox) {
+            const talentDetails = checkbox.closest('.form-check').querySelector('.talent-details');
+            if (checkbox.checked) {
+                talentDetails.style.display = 'block';
+            } else {
+                talentDetails.style.display = 'none';
+            }
+        }
+
+        function getTalentsForReq(reqID) {
+            // Mock function to return talents associated with a REQ
+            const talents = [
+                { id: 'talent' + talentCounter++, name: 'Monika Goyal Test' },
+                { id: 'talent' + talentCounter++, name: 'Shail Khatri' }
+            ];
+            return talents;
+        }
+
+        function addTalentDetail(button) {
+            const talentsList = button.closest('.req-group').querySelector('.talents-list');
+            const talent = { id: 'talent' + talentCounter++, name: 'New Talent ' + talentCounter };
+            addTalentDetailToList(talent, talentsList);
+        }
+
+        function removeTalentDetail(button) {
+            const talentDetail = button.closest('.talent-detail');
+            talentDetail.remove();
+        }
+
+        function addReqSection() {
+            const reqSection = document.getElementById('reqSection');
+            const reqGroup = document.querySelector('.req-group');
+            const newReqGroup = reqGroup.cloneNode(true);
+            reqSection.appendChild(newReqGroup);
+        }
+
+        function resetForm() {
+            const form = document.getElementById('purchaseOrderForm');
+            form.reset();
+            handlePOTypeChange();
+        }
+
+        document.getElementById('purchaseOrderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Implement form submission logic here
         });
     </script>
 </body>
